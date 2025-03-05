@@ -431,3 +431,8 @@ docker logs -f container_name
 # Deploy to Kubernetes
 kubectl apply -f deployment.yaml
 ```
+
+## Final Application Output
+
+![Wanderlust Output](Screenshot_135.png)
+
