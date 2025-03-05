@@ -217,46 +217,7 @@ sudo apt-get update -y
 sudo apt-get install trivy -y
 ```
 #
-- <b id="Argo">Install and Configure ArgoCD (Master Machine)</b>
-  - <b>Create argocd namespace</b>
-  ```bash
-  kubectl create namespace argocd
-  ```
-  - <b>Apply argocd manifest</b>
-  ```bash
-  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  ```
-  - <b>Make sure all pods are running in argocd namespace</b>
-  ```bash
-  watch kubectl get pods -n argocd
-  ```
-  - <b>Install argocd CLI</b>
-  ```bash
-  curl --silent --location -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.4.7/argocd-linux-amd64
-  ```
-  - <b>Provide executable permission</b>
-  ```bash
-  chmod +x /usr/local/bin/argocd
-  ```
-  - <b>Check argocd services</b>
-  ```bash
-  kubectl get svc -n argocd
-  ```
-  - <b>Change argocd server's service from ClusterIP to NodePort</b>
-  ```bash
-  kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
-  ```
-  - <b>Confirm service is patched or not</b>
-  ```bash
-  kubectl get svc -n argocd
-  ```
-  - <b>Fetch the initial password of argocd server</b>
-  ```bash
-  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-  ```
-  - <b>Username: admin</b>
-  - <b> Now, go to <mark>User Info</mark> and update your argocd password
-  
+
 - <b> Once, app password is create and go back to jenkins <mark>Manage Jenkins --> Credentials</mark> to add username and password for email notification</b>
 ![image](https://github.com/user-attachments/assets/2a42ec62-87c8-43c8-a034-7be0beb8824e)
 
@@ -345,14 +306,7 @@ chmod 777 /var/run/docker.sock
 ![image](https://github.com/user-attachments/assets/ec2d7a51-d78f-4947-a90b-258944ad59a2)
 
 > [!Important]
-> Make sure to click on the <mark>Auto-Create Namespace</mark> option while creating argocd application
 
-![image](https://github.com/user-attachments/assets/55dcd3c2-5424-4efb-9bee-1c12bbf7f158)
-![image](https://github.com/user-attachments/assets/3e2468ff-8cb2-4bda-a8cc-0742cd6d0cae)
-
-- <b>Congratulations, your application is deployed on AWS EKS Cluster</b>
-![image](https://github.com/user-attachments/assets/bc2d9680-fe00-49f9-81bf-93c5595c20cc)
-![image](https://github.com/user-attachments/assets/1ea9d486-656e-40f1-804d-2651efb54cf6)
 - <b>Open port 31000 and 31100 on worker node and Access it on browser</b>
 ```bash
 <worker-public-ip>:31000
