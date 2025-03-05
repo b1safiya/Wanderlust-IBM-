@@ -409,3 +409,25 @@ eksctl delete cluster --name=wanderlust --region=us-west-1
 
 ![Latest Output](path/to/latest_output_image.png)
 
+
+## Tool Dashboards
+
+### Jenkins Dashboard
+![Jenkins Dashboard](path/to/jenkins_dashboard.png)
+
+### Other Tools Dashboard
+![Tools Dashboard](path/to/tools_dashboard.png)
+
+
+## Important Commands
+
+```sh
+# Start the application
+docker-compose up -d
+
+# Check logs
+docker logs -f container_name
+
+# Deploy to Kubernetes
+kubectl apply -f deployment.yaml
+```
