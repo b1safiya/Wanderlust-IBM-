@@ -357,11 +357,7 @@ chmod 777 /var/run/docker.sock
 ```bash
 <worker-public-ip>:31000
 ```
-![image](https://github.com/user-attachments/assets/a4b2a4b4-e1aa-4b22-ac6b-f40003d0723a)
-![image](https://github.com/user-attachments/assets/06f9f1c8-094d-4d9f-a9d8-256fb18a9ae4)
-![image](https://github.com/user-attachments/assets/64394f90-8610-44c0-9f63-c3a21eb78f55)
-- <b>Email Notification</b>
-![image](https://github.com/user-attachments/assets/0ab1ef47-f939-4618-8651-6aa9274721f4)
+
 
 #
 ## How to monitor EKS cluster, kubernetes components and workloads using prometheus and grafana via HELM (On Master machine)
@@ -374,12 +370,6 @@ chmod 700 get_helm.sh
 ```
 ```bash
 ./get_helm.sh
-```
-
-#
--  Add Helm Stable Charts for Your Local Client
-```bash
-helm repo add stable https://charts.helm.sh/stable
 ```
 
 #
@@ -437,7 +427,7 @@ kubectl get secret --namespace prometheus stable-grafana -o jsonpath="{.data.adm
 ![image](https://github.com/user-attachments/assets/d2e7ff2f-059d-48c4-92bb-9711943819c4)
 ![image](https://github.com/user-attachments/assets/3d6652d0-7795-4fe9-8919-f33eac88db73)
 ![image](https://github.com/user-attachments/assets/13321ee5-5d7b-4976-b409-25d3b865a42a)
-![image](https://github.com/user-attachments/assets/75a22e4b-ae81-4cad-9c92-21dd90d126a8)
+
 
 #
 ## Clean Up
