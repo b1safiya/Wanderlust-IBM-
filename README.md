@@ -23,7 +23,6 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 - Trivy (Filesystem Scan)
 ### How pipeline will look after deployment:
 - <b>CI pipeline to build and push</b>
-![image](https://github.com/user-attachments/assets/20542d8b-0701-43ed-b2f8-82f8ed28d053)
 
 - <b>CD pipeline to update application version</b>
 ![image](https://github.com/user-attachments/assets/8fd13807-622e-45f7-af23-dcc1ba30ca5d)
@@ -206,8 +205,6 @@ sudo apt-get install trivy -y
 ```
 #
 #
-## Steps to add email notification
-- <b id="Mail">Go to your Jenkins Master EC2 instance and allow 465 port number for SMTPS</b>
 #
 - <b>Now, we need to generate an application password from our gmail account to authenticate with jenkins</b>
   - <b>Open gmail and go to <mark>Manage your Google Account --> Security</mark></b>
@@ -221,21 +218,10 @@ sudo apt-get install trivy -y
   ![image](https://github.com/user-attachments/assets/adc8d8c0-8be4-4319-9042-4115abb5c6fc)
   
 #
-- <b> Once, app password is create and go back to jenkins <mark>Manage Jenkins --> Credentials</mark> to add username and password for email notification</b>
-![image](https://github.com/user-attachments/assets/2a42ec62-87c8-43c8-a034-7be0beb8824e)
-
 # 
 - <b> Go back to <mark>Manage Jenkins --> System</mark> and search for <mark>Extended E-mail Notification</mark></b>
 ![image](https://github.com/user-attachments/assets/bac81e24-bb07-4659-a251-955966feded8)
 #
-- <b>Scroll down and search for <mark>E-mail Notification</mark> and setup email notification</b>
-> [!Important]
-> Enter your gmail password which we copied recently in password field <mark>E-mail Notification --> Advance</mark>
-
-![image](https://github.com/user-attachments/assets/14e254fc-1400-457e-b3f4-046404b66950)
-![image](https://github.com/user-attachments/assets/7be70b3a-b0dc-415c-838a-b1c6fd87c182)
-![image](https://github.com/user-attachments/assets/cffb6e1d-4838-483e-97e0-6851c204ab21)
-
 #
 ## Steps to implement the project:
 - <b>Go to Jenkins Master and click on <mark> Manage Jenkins --> Plugins --> Available plugins</mark> install the below plugins:</b>
@@ -418,3 +404,8 @@ eksctl delete cluster --name=wanderlust --region=us-west-1
 ```
 
 #
+
+## Final Application Output
+
+![Latest Output](path/to/latest_output_image.png)
+
