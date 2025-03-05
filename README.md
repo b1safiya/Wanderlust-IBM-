@@ -93,7 +93,7 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 ```
 - <b>Now, access Jenkins Master on the browser on port 8080 and configure it</b>.
-#
+
 - <b id="EKS">Create EKS Cluster on AWS (Master machine)</b>
   - IAM user with **access keys and secret access keys**
   - AWSCLI should be configured (<a href="https://github.com/b1safiya/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
@@ -335,43 +335,9 @@ sudo apt-get install trivy -y
 chmod 777 /var/run/docker.sock
 ```
 ![image](https://github.com/user-attachments/assets/e231c62a-7adb-4335-b67e-480758713dbf)
-#
-- <b> Go to Master Machine and add our own eks cluster to argocd for application deployment using cli</b>
-  - <b>Login to argoCD from CLI</b>
-  ```bash
-   argocd login 52.53.156.187:32738 --username admin
-  ```
-> [!Tip]
-> 52.53.156.187:32738 --> This should be your argocd url
 
-  ![image](https://github.com/user-attachments/assets/7d05e5ca-1a16-4054-a321-b99270ca0bf9)
-
-  - <b>Check how many clusters are available in argocd </b>
-  ```bash
-  argocd cluster list
-  ```
-  ![image](https://github.com/user-attachments/assets/76fe7a45-e05c-422d-9652-bdaee02d630f)
-  - <b>Get your cluster name</b>
-  ```bash
-  kubectl config get-contexts
-  ```
-  ![image](https://github.com/user-attachments/assets/4cab99aa-cef3-45f6-9150-05004c2f09f8)
-  - <b>Add your cluster to argocd</b>
-  ```bash
-  argocd cluster add Wanderlust@wanderlust.us-west-1.eksctl.io --name wanderlust-eks-cluster
-  ```
-  > [!Tip]
-  > Wanderlust@wanderlust.us-west-1.eksctl.io --> This should be your EKS Cluster Name.
-
-  ![image](https://github.com/user-attachments/assets/0f36aafd-bab9-4ef8-ba5d-3eb56d850604)
-  - <b> Once your cluster is added to argocd, go to argocd console <mark>Settings --> Clusters</mark> and verify it</b>
-  ![image](https://github.com/user-attachments/assets/4490b632-19fd-4499-a341-fabf8488d13c)
-#
 - <b>Go to <mark>Settings --> Repositories</mark> and click on <mark>Connect repo</mark> </b>
-![image](https://github.com/user-attachments/assets/cc8728e5-546b-4c46-bd4c-538f4cd6a63d)
-![image](https://github.com/user-attachments/assets/eb3646e2-db84-4439-a11a-d4168080d9cc)
-![image](https://github.com/user-attachments/assets/a07f8703-5ef3-4524-aaa7-39a139335eb7)
-> [!Note]
+
 > Connection should be successful
 
 - <b>Now, go to <mark>Applications</mark> and click on <mark>New App</mark></b>
