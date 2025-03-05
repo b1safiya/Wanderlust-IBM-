@@ -415,31 +415,10 @@ kubectl get pods -n prometheus
 kubectl get svc -n prometheus
 ```
 
-#
-- Expose Prometheus and Grafana to the external world through Node Port
-> [!Important]
-> change it from Cluster IP to NodePort after changing make sure you save the file and open the assigned nodeport to the service.
-
-```bash
-kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
-```
-![image](https://github.com/user-attachments/assets/90f5dc11-23de-457d-bbcb-944da350152e)
-![image](https://github.com/user-attachments/assets/ed94f40f-c1f9-4f50-a340-a68594856cc7)
-
-#
 - Verify service
 ```bash
 kubectl get svc -n prometheus
 ```
-
-#
-- Now,let’s change the SVC file of the Grafana and expose it to the outer world
-```bash
-kubectl edit svc stable-grafana -n prometheus
-```
-![image](https://github.com/user-attachments/assets/4a2afc1f-deba-48da-831e-49a63e1a8fb6)
-
-#
 - Check grafana service
 ```bash
 kubectl get svc -n prometheus
