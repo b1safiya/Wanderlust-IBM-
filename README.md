@@ -112,22 +112,4 @@ trivy image myapp:latest
 kubectl logs -f pod_name
 ```
 
-## Application Screenshots
 
-### Home Page
-![Home Page](Screenshot_135.png)
-
-### Jenkins Dashboard
-![Jenkins Dashboard](path/to/jenkins_dashboard.png)
-
-### CI/CD Pipeline Overview
-![Pipeline](path/to/cicd_pipeline.png)
-
-### Kubernetes Deployment
-![Kubernetes Deployment](path/to/kubernetes_deployment.png)
-
-### Security Scan Results
-![Security Scan](path/to/security_scan.png)
-
-### Monitoring Dashboard
-![Monitoring Dashboard](path/to/monitoring_dashboard.png)
