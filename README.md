@@ -21,11 +21,6 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 - OWASP (Dependency check)
 - SonarQube (Quality)
 - Trivy (Filesystem Scan)
-- ArgoCD (CD)
-- Redis (Caching)
-- AWS EKS (Kubernetes)
-- Helm (Monitoring using grafana and prometheus)
-
 ### How pipeline will look after deployment:
 - <b>CI pipeline to build and push</b>
 ![image](https://github.com/user-attachments/assets/20542d8b-0701-43ed-b2f8-82f8ed28d053)
@@ -41,13 +36,6 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 | -------- | ------- |
 | Jenkins Master | <a href="#Jenkins">Install and configure Jenkins</a>     |
 | eksctl | <a href="#EKS">Install eksctl</a>     |
-| Argocd | <a href="#Argo">Install and configure ArgoCD</a>     |
-| Jenkins-Worker Setup | <a href="#Jenkins-worker">Install and configure Jenkins Worker Node</a>     |
-| OWASP setup | <a href="#Owasp">Install and configure OWASP</a>     |
-| SonarQube | <a href="#Sonar">Install and configure SonarQube</a>     |
-| Email Notification Setup | <a href="#Mail">Email notification setup</a>     |
-| Monitoring | <a href="#Monitor">Prometheus and grafana setup using helm charts</a>
-| Clean Up | <a href="#Clean">Clean up</a>     |
 #
 
 ### Pre-requisites to implement this project:
@@ -93,10 +81,10 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 ```
 - <b>Now, access Jenkins Master on the browser on port 8080 and configure it</b>.
-
+#
 - <b id="EKS">Create EKS Cluster on AWS (Master machine)</b>
   - IAM user with **access keys and secret access keys**
-  - AWSCLI should be configured (<a href="https://github.com/b1safiya/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
+  - AWSCLI should be configured (<a href="https://github.com/DevMadhup/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
   ```bash
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   sudo apt install unzip
@@ -217,7 +205,22 @@ sudo apt-get update -y
 sudo apt-get install trivy -y
 ```
 #
+#
+## Steps to add email notification
+- <b id="Mail">Go to your Jenkins Master EC2 instance and allow 465 port number for SMTPS</b>
+#
+- <b>Now, we need to generate an application password from our gmail account to authenticate with jenkins</b>
+  - <b>Open gmail and go to <mark>Manage your Google Account --> Security</mark></b>
+> [!Important]
+> Make sure 2 step verification must be on
 
+  ![image](https://github.com/user-attachments/assets/5ab9dc9d-dcce-4f9d-9908-01095f1253cb)
+
+  - <b>Search for <mark>App password</mark> and create a app password for jenkins</b>
+  ![image](https://github.com/user-attachments/assets/701752da-7703-4685-8f06-fe1f65dd1b9c)
+  ![image](https://github.com/user-attachments/assets/adc8d8c0-8be4-4319-9042-4115abb5c6fc)
+  
+#
 - <b> Once, app password is create and go back to jenkins <mark>Manage Jenkins --> Credentials</mark> to add username and password for email notification</b>
 ![image](https://github.com/user-attachments/assets/2a42ec62-87c8-43c8-a034-7be0beb8824e)
 
@@ -296,9 +299,13 @@ sudo apt-get install trivy -y
 chmod 777 /var/run/docker.sock
 ```
 ![image](https://github.com/user-attachments/assets/e231c62a-7adb-4335-b67e-480758713dbf)
-
+#
+#
 - <b>Go to <mark>Settings --> Repositories</mark> and click on <mark>Connect repo</mark> </b>
-
+![image](https://github.com/user-attachments/assets/cc8728e5-546b-4c46-bd4c-538f4cd6a63d)
+![image](https://github.com/user-attachments/assets/eb3646e2-db84-4439-a11a-d4168080d9cc)
+![image](https://github.com/user-attachments/assets/a07f8703-5ef3-4524-aaa7-39a139335eb7)
+> [!Note]
 > Connection should be successful
 
 - <b>Now, go to <mark>Applications</mark> and click on <mark>New App</mark></b>
@@ -306,13 +313,6 @@ chmod 777 /var/run/docker.sock
 ![image](https://github.com/user-attachments/assets/ec2d7a51-d78f-4947-a90b-258944ad59a2)
 
 > [!Important]
-
-- <b>Open port 31000 and 31100 on worker node and Access it on browser</b>
-```bash
-<worker-public-ip>:31000
-```
-
-
 #
 ## How to monitor EKS cluster, kubernetes components and workloads using prometheus and grafana via HELM (On Master machine)
 - <p id="Monitor">Install Helm Chart</p>
@@ -324,6 +324,12 @@ chmod 700 get_helm.sh
 ```
 ```bash
 ./get_helm.sh
+```
+
+#
+-  Add Helm Stable Charts for Your Local Client
+```bash
+helm repo add stable https://charts.helm.sh/stable
 ```
 
 #
@@ -359,10 +365,31 @@ kubectl get pods -n prometheus
 kubectl get svc -n prometheus
 ```
 
+#
+- Expose Prometheus and Grafana to the external world through Node Port
+> [!Important]
+> change it from Cluster IP to NodePort after changing make sure you save the file and open the assigned nodeport to the service.
+
+```bash
+kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
+```
+![image](https://github.com/user-attachments/assets/90f5dc11-23de-457d-bbcb-944da350152e)
+![image](https://github.com/user-attachments/assets/ed94f40f-c1f9-4f50-a340-a68594856cc7)
+
+#
 - Verify service
 ```bash
 kubectl get svc -n prometheus
 ```
+
+#
+- Now,let’s change the SVC file of the Grafana and expose it to the outer world
+```bash
+kubectl edit svc stable-grafana -n prometheus
+```
+![image](https://github.com/user-attachments/assets/4a2afc1f-deba-48da-831e-49a63e1a8fb6)
+
+#
 - Check grafana service
 ```bash
 kubectl get svc -n prometheus
@@ -381,7 +408,7 @@ kubectl get secret --namespace prometheus stable-grafana -o jsonpath="{.data.adm
 ![image](https://github.com/user-attachments/assets/d2e7ff2f-059d-48c4-92bb-9711943819c4)
 ![image](https://github.com/user-attachments/assets/3d6652d0-7795-4fe9-8919-f33eac88db73)
 ![image](https://github.com/user-attachments/assets/13321ee5-5d7b-4976-b409-25d3b865a42a)
-
+![image](https://github.com/user-attachments/assets/75a22e4b-ae81-4cad-9c92-21dd90d126a8)
 
 #
 ## Clean Up
