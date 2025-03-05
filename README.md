@@ -33,9 +33,6 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 - <b>CD pipeline to update application version</b>
 ![image](https://github.com/user-attachments/assets/8fd13807-622e-45f7-af23-dcc1ba30ca5d)
 
-- <b>ArgoCD application for deployment on EKS</b>
-![image](https://github.com/user-attachments/assets/1ea9d486-656e-40f1-804d-2651efb54cf6)
-
 #
 > [!Important]
 > Below table helps you to navigate to the particular tool installation section fast.
@@ -99,7 +96,7 @@ sudo apt-get install jenkins -y
 #
 - <b id="EKS">Create EKS Cluster on AWS (Master machine)</b>
   - IAM user with **access keys and secret access keys**
-  - AWSCLI should be configured (<a href="https://github.com/DevMadhup/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
+  - AWSCLI should be configured (<a href="https://github.com/b1safiya/DevOps-Tools-Installations/blob/main/AWSCLI/AWSCLI.sh">Setup AWSCLI</a>)
   ```bash
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   sudo apt install unzip
@@ -253,37 +250,13 @@ sudo apt-get install trivy -y
   ```bash
   kubectl get svc -n argocd
   ```
-  - <b> Check the port where ArgoCD server is running and expose it on security groups of a worker node</b>
-  ![image](https://github.com/user-attachments/assets/a2932e03-ebc7-42a6-9132-82638152197f)
-  - <b>Access it on browser, click on advance and proceed with</b>
-  ```bash
-  <public-ip-worker>:<port>
-  ```
-  ![image](https://github.com/user-attachments/assets/29d9cdbd-5b7c-44b3-bb9b-1d091d042ce3)
-  ![image](https://github.com/user-attachments/assets/08f4e047-e21c-4241-ba68-f9b719a4a39a)
-  ![image](https://github.com/user-attachments/assets/1ffa85c3-9055-49b4-aab0-0947b95f0dd2)
   - <b>Fetch the initial password of argocd server</b>
   ```bash
   kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
   ```
   - <b>Username: admin</b>
   - <b> Now, go to <mark>User Info</mark> and update your argocd password
-#
-## Steps to add email notification
-- <b id="Mail">Go to your Jenkins Master EC2 instance and allow 465 port number for SMTPS</b>
-#
-- <b>Now, we need to generate an application password from our gmail account to authenticate with jenkins</b>
-  - <b>Open gmail and go to <mark>Manage your Google Account --> Security</mark></b>
-> [!Important]
-> Make sure 2 step verification must be on
-
-  ![image](https://github.com/user-attachments/assets/5ab9dc9d-dcce-4f9d-9908-01095f1253cb)
-
-  - <b>Search for <mark>App password</mark> and create a app password for jenkins</b>
-  ![image](https://github.com/user-attachments/assets/701752da-7703-4685-8f06-fe1f65dd1b9c)
-  ![image](https://github.com/user-attachments/assets/adc8d8c0-8be4-4319-9042-4115abb5c6fc)
   
-#
 - <b> Once, app password is create and go back to jenkins <mark>Manage Jenkins --> Credentials</mark> to add username and password for email notification</b>
 ![image](https://github.com/user-attachments/assets/2a42ec62-87c8-43c8-a034-7be0beb8824e)
 
